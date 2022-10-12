@@ -2,9 +2,11 @@
 
 A simple touch detection script for ESP32C3 boards using analog pins.
 
-This is an .ino script file for Arduino IDE.
+This is an .ino script file for Arduino IDE to serve as an idea for your projects.
 
 It should work on any compatible board with ADC pins.
+
+With touch detection, you avoid the use of push buttons and save a lot of space on your project.
 
 Original idea came from here:
 https://www.esp32.com/viewtopic.php?t=23066

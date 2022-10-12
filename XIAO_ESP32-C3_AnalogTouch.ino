@@ -29,6 +29,7 @@ int MV=20;        //values for mean array
 int mean[20]={};  //change 
 int avg;
 int fin;
+int refV=200;     //voltage drop that triggers detection (mV)
 
 // touch pin (Define any ADC pin on your board)
 int TP=3;
@@ -96,7 +97,7 @@ void extended(){
     Serial.println(avg);
 
     //compare average with last value
-    if((avg-fin)>200){
+    if((avg-fin)>refV){
       Serial.println("----------  T   O    U    C    H  ----------");
       //increase counter
       touch++;
@@ -134,7 +135,7 @@ void minimal(){
     avg=avg/MV;
 
     //compare average with last value
-    if((avg-fin)>200){
+    if((avg-fin)>refV){
       Serial.println("----------  T   O    U    C    H  ----------");
       //increase counter
       touch++;

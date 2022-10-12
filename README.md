@@ -1,9 +1,9 @@
 # ESP32C3_AnalogTouch
 Touch detection for ESP32C3 boards using analog pins
 
-This is .ino script file for Arduino IDE.
+This is an .ino script file for Arduino IDE.
 
-Should work on any compatible board with ADC pins.
+It should work on any compatible board with ADC pins.
 
 Original idea came from here:
 https://www.esp32.com/viewtopic.php?t=23066

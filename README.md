@@ -9,7 +9,7 @@ It should work on any compatible board with ADC pins.
 Original idea came from here:
 https://www.esp32.com/viewtopic.php?t=23066
 
-## Workflow description
+## Process description
 1. Read an array of ADC values and calculate the mean value.
 2. If the last value is 200mV lower than the average, touch is recognised.
 

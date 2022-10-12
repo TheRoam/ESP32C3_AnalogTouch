@@ -17,6 +17,10 @@ https://www.esp32.com/viewtopic.php?t=23066
 2. Define ADC pin as TP in the script
 3. Load script to your board using Arduino IDE.
 
+The example uses pin D1 (GPIO3) of a XIAO ESP32-C3
+
+https://wiki.seeedstudio.com/XIAO_ESP32C3_Getting_Started/#pinout-diagram
+
 ## Calibration variables
 
 MV: number of values used in array to calculate ADC mean value.

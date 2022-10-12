@@ -1,12 +1,11 @@
 # ESP32C3_AnalogTouch
 
 A simple touch detection script for ESP32C3 boards using analog pins.
+It should work on any compatible board with ADC pins.
 
 This is an .ino script file for Arduino IDE to serve as an idea for your projects.
 
-It should work on any compatible board with ADC pins.
-
-With touch detection, you avoid the use of push buttons and save a lot of physical space in your project.
+With touch detection you avoid the use of push buttons and save a lot of physical space in your project.
 
 Original idea came from here:
 https://www.esp32.com/viewtopic.php?t=23066
@@ -30,7 +29,7 @@ MV: number of values used in array to calculate ADC mean value.
   --> Higher value, more efficiency. Default is 20.
 
 refV: voltage drop (in mV) that triggers touch detection.
-  --> Default is 200.
+  --> Default is 750. Lower values increase sensitivity but it can trigger itself without touch. Up to 200 is advisable with good efficiency. 
 
 d: comparison delay time in ms.
   --> Lower value increases CPU load but reduces efficiency. Default is 100.

@@ -9,12 +9,12 @@ Original idea came from here:
 https://www.esp32.com/viewtopic.php?t=23066
 
 ## Description
-1. Read array of ADC values and calculate the mean value.
-2. If last value is 200mV lower than mean, touch is recognised.
+1. Read an array of ADC values and calculate the mean value.
+2. If the last value is 200mV lower than the average, touch is recognised.
 
 ## Usage
-1. Connect jumper wire to any ADC pin on your board.
-2. Define ADC pin as TP in the script
+1. Connect a jumper wire to any ADC pin on your board.
+2. Define ADC pin as TP in the script.
 3. Load script to your board using Arduino IDE.
 
 The example uses pin D1 (GPIO3) of a XIAO ESP32-C3

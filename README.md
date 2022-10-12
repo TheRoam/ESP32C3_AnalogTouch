@@ -6,7 +6,7 @@ This is an .ino script file for Arduino IDE to serve as an idea for your project
 
 It should work on any compatible board with ADC pins.
 
-With touch detection, you avoid the use of push buttons and save a lot of space on your project.
+With touch detection, you avoid the use of push buttons and save a lot of physical space in your project.
 
 Original idea came from here:
 https://www.esp32.com/viewtopic.php?t=23066

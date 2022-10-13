@@ -33,7 +33,6 @@
 #define LEDPIN 20       //led pin
 #define VALINTERVAL 100 //evaluation interval
 #define REFV 80         //reference voltage drop in mV
-#define WARMUP 0        //delay time after reboot before evaluation starts
 
 // Calibration:
 // 1. Set a high REFV, for example 1000
@@ -45,11 +44,9 @@
 //    -- For more sensitivity, set it a bit lower (50)
 //    -- If there is detection with no touch, increase it (80)
 //    -- Because of CPU load, REFV value will vary if OUT 1 or OUT 0
-//    -- Touch could triggers itself for a few seconds during start, as analog readings are higher.
 
 
 int out=OUT;
-int wmp=WARMUP;
 int mean[VALUES]={};  //change 
 int avg;
 int fin;
@@ -71,16 +68,10 @@ void setup() {
   Serial.begin(115200);
   //enable LED pin
   pinMode(LP,OUTPUT);
+  setTouch(TP);
 }
 
 void loop() {
-  //wait for board to normalise
-  if(wmp==1){
-    Serial.println("Warming up....");
-    delay(WARMUP*1000);
-    Serial.println("Start readings!");
-    wmp=0;
-  }
   setTouch(TOUCHPIN);
   
   //run check
@@ -102,16 +93,6 @@ void setTouch(int tp){
 
 int extended(int tp){
   for(int i=0;i<VALUES;i++){
-    // send value to array
-    mean[i]=analogRead(tp);
-    //start printing array in monitor
-    Serial.println("Array: [");
-
-    //read final value
-    fin=analogRead(tp);
-
-    Serial.print("Last: ");
-    Serial.println(fin);
     //get average of array
     //start printing array
     Serial.println("Array: [");
@@ -127,6 +108,12 @@ int extended(int tp){
     avg=avg/VALUES;
     Serial.print("Average: ");
     Serial.println(avg);
+
+    //read final value
+    fin=analogRead(tp);
+
+    Serial.print("Last: ");
+    Serial.println(fin);
     
     //compare average with last value
     if((avg-fin)>REFV){
@@ -151,21 +138,18 @@ int extended(int tp){
 }
 
 int minimal(int tp){
-  //start reading values
   for(int i=0;i<VALUES;i++){
-    // read value
-    mean[i]=analogRead(tp);
-
-    //read final value
-    fin=analogRead(tp);
     //get average of array
     for(int j=0;j<VALUES;j++){
       avg+=mean[j];
     }
     
     avg=avg/VALUES;
+
+    //read current value
+    fin=analogRead(tp);
     
-    //compare average with last value
+    //compare average with current value
     if((avg-fin)>REFV){
       Serial.println("----------  T   O    U    C    H  ----------");
       //increase counter

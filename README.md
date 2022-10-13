@@ -19,7 +19,7 @@ https://www.esp32.com/viewtopic.php?t=23066
 1. Read an array of ADC values and calculate the mean value.
 2. If the last value is 200mV lower than the average, touch is recognised.
 
-# XIAO_ESP32-C3 example
+# ESP32C3 example
 
 This example only prints touch detection on serial monitor.
 It can be used in any compatible board with analog pins.

@@ -30,7 +30,7 @@ It can be used in any compatible board with analog pins.
 3. Load script to your board using Arduino IDE.
 4. Calibrate following guidelines for fine performance.
 
-# Pro Micro example
+# Pro Micro Blink example
 
 This example prints touch detection on serial monitor and lights a LED connected to any output pin.
 

@@ -26,14 +26,23 @@ It can be used in any compatible board with analog pins.
 
 ## Usage
 1. Connect a jumper wire to any ADC pin on your board.
-2. Define ADC pin as TP in the script.
+2. Define ADC pin as **TOUCHPIN** in the script '#define's.
 3. Load script to your board using Arduino IDE.
+4. Calibrate following guidelines for fine performance.
 
-The example uses pin D1 (GPIO3) of a XIAO ESP32-C3
+# XIAO_ESP32-C3 example
 
-https://wiki.seeedstudio.com/XIAO_ESP32C3_Getting_Started/#pinout-diagram
+This example prints touch detection on serial monitor and lights a LED connected to any output pin.
 
-## Calibration variables
+## Usage
+1. Connect a led to any output PIN, then ground it via a resistor.
+2. Connect a jumper wire to any ADC pin on your board.
+3. Define ADC pin as **TOUCHPIN^ and led pin as **LEDPIN** in the script '#define's.
+4. Load script to your board using Arduino IDE.
+5. Calibrate following guidelines for fine performance.
+
+
+# Calibration variables
 
 VALUES: number of values used in array to calculate ADC mean value.
   --> Higher value, more efficiency. Default is 20.
@@ -43,10 +52,22 @@ REFV: voltage drop (in mV) that triggers touch detection.
 
 VALINTERVAL: comparison delay time in ms.
   --> Lower value increases CPU load but reduces efficiency. Default is 100.
-  
-## Debugging
 
-Monitor output can be switched to two values in "out" variable.
+## Calibration guide
+1. Set a high REFV, for example 1000
+2. Run the extended script with OUT 1
+3. Open Serial Monitor and have a look at the average values for a while (e.g.: 230)
+4. Now touch the jumper wire and see what the values are now (e.g.: 170)
+5. Make the difference between the average at 3. and the average at 4 (230-170=60).
+6. Set your REFV to this value (60) and play around it.
+- For more sensitivity, set it a bit lower (50)
+- If there is detection with no touch, increase it (80)
+- Because of CPU load, REFV value will vary if OUT 1 or OUT 0
+- Touch could triggers itself for a few seconds during start, as analog readings are higher.
+
+# Debugging
+
+Monitor output can be reduced or extended setting the OUT variable to 0 or 1
 
 1: extended --> Prints ADC array, mean value, touch count and touch message with touch count
 

@@ -63,7 +63,7 @@ VALINTERVAL: comparison delay time in ms.
 - For more sensitivity, set it a bit lower (50)
 - If there is detection with no touch, increase it (80)
 - Because of CPU load, REFV value will vary if OUT 1 or OUT 0
-- Touch could triggers itself for a few seconds during start, as analog readings are higher.
+- Touch could trigger itself for a few seconds during start, as analog readings are higher. Set a WARMUP waiting time for readings to start.
 
 # Debugging
 

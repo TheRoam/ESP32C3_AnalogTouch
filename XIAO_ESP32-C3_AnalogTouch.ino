@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------//
-//------------------------ XIAO ESP32-C3 AnalogTouch 1.1 ------------------------//
+//------------------------ XIAO ESP32-C3 AnalogTouch 1.0 ------------------------//
 //                                                                               //
 // Based on AnalogRead example script for Esp32 library by Espressif             //
 // Usage & principles:                                                           //
@@ -30,7 +30,6 @@
 #define TOUCHPIN 3      //touch pin
 #define VALINTERVAL 100 //evaluation interval
 #define REFV 80         //reference voltage drop in mV
-#define WARMUP 0        //delay time after reboot before evaluation starts
 
 // Calibration:
 // 1. Set a high REFV, for example 1000
@@ -46,7 +45,6 @@
 
 
 int out=OUT;
-int wmp=WARMUP;
 int mean[VALUES]={};  //change 
 int avg;
 int fin;
@@ -64,16 +62,10 @@ int touch=0;
 void setup() {
   // initialize serial communication at 115200 bits per second:
   Serial.begin(115200);
+  setTouch(TP);
 }
 
 void loop() {
-  //wait for board to normalise
-  if(wmp==1){
-    Serial.println("Warming up....");
-    delay(WARMUP*1000);
-    Serial.println("Start readings!");
-    wmp=0;
-  }
   setTouch(TOUCHPIN);
   //run check
   if(out==1){
@@ -94,16 +86,6 @@ void setTouch(int tp){
 
 int extended(int tp){
   for(int i=0;i<VALUES;i++){
-    // send value to array
-    mean[i]=analogRead(tp);
-    //start printing array in monitor
-    Serial.println("Array: [");
-
-    //read final value
-    fin=analogRead(tp);
-
-    Serial.print("Last: ");
-    Serial.println(fin);
     //get average of array
     //start printing array
     Serial.println("Array: [");
@@ -119,6 +101,11 @@ int extended(int tp){
     avg=avg/VALUES;
     Serial.print("Average: ");
     Serial.println(avg);
+
+    //read current value
+    fin=analogRead(tp);
+    Serial.print("Last: ");
+    Serial.println(fin);
     
     //compare average with last value
     if((avg-fin)>REFV){
@@ -141,17 +128,15 @@ int extended(int tp){
 int minimal(int tp){
   //start reading values
   for(int i=0;i<VALUES;i++){
-    // read value
-    mean[i]=analogRead(tp);
-
-    //read final value
-    fin=analogRead(tp);
     //get average of array
     for(int j=0;j<VALUES;j++){
       avg+=mean[j];
     }
     
     avg=avg/VALUES;
+    
+    //read final value  
+    fin=analogRead(tp);
     
     //compare average with last value
     if((avg-fin)>REFV){

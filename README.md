@@ -8,7 +8,7 @@ Tested on these boards:
  - SparkFun Pro Micro
  - Digispark Attiny85
 
-This is an .ino script file for Arduino IDE to serve as an idea for your projects.
+There are two .ino script files for Arduino IDE to serve as an idea for your projects.
 
 With touch detection you avoid the use of push buttons and save a lot of physical space in your project.
 
@@ -18,6 +18,11 @@ https://www.esp32.com/viewtopic.php?t=23066
 ## Process description
 1. Read an array of ADC values and calculate the mean value.
 2. If the last value is 200mV lower than the average, touch is recognised.
+
+# XIAO_ESP32-C3 example
+
+This example only prints touch detection on serial monitor.
+It can be used in any compatible board with analog pins.
 
 ## Usage
 1. Connect a jumper wire to any ADC pin on your board.
